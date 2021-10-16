@@ -61,6 +61,7 @@
       padding: 8px 12px;
       border-radius: 5px;
       cursor: pointer;
+      font-size: 13px;
     }
 
     .cart {
