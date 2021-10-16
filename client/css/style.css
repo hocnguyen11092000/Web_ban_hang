@@ -398,9 +398,9 @@ p.load a#load-more span {
   min-width: 228px !important;
   margin-right: 15px;
 }
-.productSlider .product:nth-child(5n){
+/* .productSlider .product:nth-child(5n){
   margin-right: 0;
-}
+} */
 
 .slider {
   width: 1200px;
