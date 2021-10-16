@@ -202,9 +202,14 @@ h1 {
   position: absolute;
   top: 30px;
   left: 230px;
-  padding: 5px 8px;
+  min-width: 30px;
+  min-height: 30px;
+  padding: 5px;
   font-size: 15px;
   color: #fff;
-  background-color: #fb6e2e;
-  border-radius: 5px;
+  background-color: rgb(255, 99, 132);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
