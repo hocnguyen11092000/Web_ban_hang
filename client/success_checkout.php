@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Thanh toán thành công</title>
   <link rel="stylesheet" href="./css/grid.css">
-  <link rel="icon" href="../images/Mega Lucario.jfif">
+  <link rel="icon" href="../images/logo.png">
   <link rel="stylesheet" href="./css/style.css">
   <style>
     .checkout-info {
