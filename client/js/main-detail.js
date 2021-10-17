@@ -67,7 +67,7 @@ function pageCartList() {
   $('.count-cart').innerText = ' Tổng tiền: ' + total + ' trieu'
 }
 function deleteItem(id) {
-  const check_delete = confirm('M chắc chưa? ')
+  const check_delete = confirm('Xóa sản phẩm khỏi giỏ hàng?')
   if (check_delete) {
     for (var i = 0; i < cartList.length; i++) {
       if (cartList[i].id == id) {
