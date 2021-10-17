@@ -462,13 +462,23 @@
         }
       }
       if (!isFind) {
-        cartList.push({
-          id,
-          img,
-          name,
-          price,
-          'num': 1,
-        })
+        if (addQuanlity !== '1') {
+          cartList.push({
+            id,
+            img,
+            name,
+            price,
+            'num': Number.parseInt(addQuanlity),
+          })
+        } else {
+          cartList.push({
+            id,
+            img,
+            name,
+            price,
+            'num': 1,
+          })
+        }
       }
 
       console.log(cartList)

@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="./css/grid.css">
   <link rel="stylesheet" href="./css/style.css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
+  <link rel="icon" href="../images/logo.png">
   <title>Detail Page</title>
   <style>
     * {
@@ -48,6 +49,10 @@
       cursor: pointer;
     }
 
+    a {
+      text-decoration: none !important;
+    }
+
     .add-cart {
       border: none;
       outline: none;
@@ -56,6 +61,7 @@
       padding: 8px 12px;
       border-radius: 5px;
       cursor: pointer;
+      font-size: 13px;
     }
 
     .cart {
@@ -72,6 +78,7 @@
       transition: 0.3s ease;
       background-color: #bcdefb;
       overflow-y: auto;
+      z-index: 999;
     }
 
     .cart.active {
@@ -80,6 +87,7 @@
 
     .cart__hide {
       position: absolute;
+      z-index: 999;
       top: -7px;
       left: -9px;
       width: 30px;
@@ -112,11 +120,14 @@
       font-size: 13px;
       display: inline-block;
       padding: 10px;
+      flex-basis: 60%;
+      text-align: center;
     }
 
     .cart__list .item img {
       max-width: 60px;
       object-fit: cover;
+      flex-basis: 10%;
     }
 
     .total {
@@ -147,6 +158,11 @@
       padding: 5px;
       border-radius: 5px;
       cursor: pointer;
+      flex-basis: 10% !important;
+    }
+
+    .item-count {
+      flex-basis: 10% !important;
     }
 
     .check-out {
@@ -161,15 +177,50 @@
       background-color: #fff;
       cursor: pointer;
       text-decoration: none;
+      color: #333;
+      z-index: 3;
+    }
+
+    .check-out::before {
+      content: 'Thanh Toán';
+      position: absolute;
+      top: -8px;
+      left: 152px;
+      width: 0;
+      height: 33.6px;
+      border-radius: 5px;
+      background-color: rgb(26, 148, 255);
+      cursor: pointer;
+      color: #fff;
+      transition: 0.3s cubic-bezier(1, 0.41, 0, 0.74);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      visibility: hidden;
+      z-index: 2;
+    }
+
+    .check-out:hover::before {
+      width: 105px;
+      cursor: pointer;
+      z-index: 2;
+      opacity: 1;
+      visibility: visible;
     }
 
     .check-out {
       text-align: center;
+      position: relative;
     }
 
     .sub__name {
       font-size: 18px;
       font-weight: bold;
+    }
+
+    .sub__name p {
+      margin-top: 0;
     }
 
     .sub__price {
@@ -211,7 +262,9 @@
 
     .scroll-top {
       position: fixed;
-      bottom: 40px;
+      bottom: 140px;
+      opacity: 0;
+      visibility: hidden;
       right: 40px;
       width: 40px;
       height: 40px;
@@ -223,10 +276,38 @@
       align-items: center;
       border-radius: 50%;
       cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    .scroll-top.show {
+      bottom: 40px;
+      opacity: 1;
+      visibility: visible;
     }
 
     .scroll-top span {
       background-color: rgb(26, 148, 255);
+    }
+
+    .sub__add-quanlity input {
+      border: 1px solid #ccc;
+      padding: 10px 12px;
+      outline: none;
+      font-size: 13px;
+      text-align: center;
+      width: 60px;
+      height: 20px;
+      border-radius: 5px;
+      margin-bottom: 15px;
+    }
+
+    .minus,
+    .plus {
+      color: #333;
+      border: 1px solid #ccc;
+      font-size: 13px;
+      padding: 2px 5px;
+      border-radius: 5px;
     }
   </style>
 </head>
@@ -235,12 +316,14 @@
   <?php
   include('../server/config/config.php');
   ?>
+
   <?php
   $cart = '[]';
   if (isset($_COOKIE['cart'])) {
     $cart = $_COOKIE['cart'];
   }
   ?>
+
   <?php
   include('./header.php')
   ?>
@@ -248,6 +331,7 @@
   <div class="wrapper">
     <div class="grid wide">
       <div class="row">
+
         <?php
         if (isset($_GET['id'])) {
           $id = $_GET['id'];
@@ -278,9 +362,11 @@
                 <?php echo $row['Gia'] . ' triệu' ?>
               </p>
             </div>
-            <div class="sub__add-quanlity">
-              <input type="text">
-            </div>
+            <span class="minus"><i class="fas fa-minus"></i></span>
+            <span class="sub__add-quanlity">
+              <input type="text" value="1">
+            </span>
+            <span class="plus"><i class="fas fa-plus"></i></span>
             <div class="sub__add-cart">
               <button class="add-cart">Thêm vào giỏ hàng</button>
               <span class="watch-cart">
@@ -299,17 +385,13 @@
                 hic, voluptatibus possimus obcaecati vitae, dicta a ipsa vero, omnis repudiandae consequatur
                 perferendis? Atque qui, aut illum expedita molestiae sapiente similique vero ab quam quasi, pariatur nam
                 perferendis non! Quasi iusto ab voluptates, laboriosam alias mollitia sed autem reiciendis est, fuga
-                minima unde officia minus temporibus expedita et aut voluptas ea. Expedita nesciunt harum nobis
-                asperiores sit delectus dolorum soluta nulla et doloremque? Id nostrum repellendus excepturi beatae
-                voluptatum saepe eius voluptas eligendi ad, aperiam harum odit error pariatur neque laboriosam possimus
-                sunt nam quisquam ipsum. Quos cum quam aut consequatur, exercitationem perferendis itaque excepturi sed
-                expedita facilis rerum. Repellat aspernatur eveniet deserunt, quod eum iure.</p>
+              </p>
             </div>
           </div>
         </div>
         <div class="col l-12 m-12 c-12">
           <div class="sub__specification">
-            <h2>Mô tả chi tiết sản phẩm</p>
+            <h2>Mô tả chi tiết sản phẩm: </p>
               <p>
                 <?php echo $row['QuyCach'] ?>
               </p>
@@ -332,13 +414,26 @@
     </div>
     <div class="check-out"><a href="checkout.php" class="checkout">Thanh toán</a></div>
   </div>
+  <div class="search-product" id="search-form">
+    <form action="index.php" method="GET">
+      <input type="text" name="q" placeholder="Tìm kiếm...">
+    </form>
+  </div>
+  <div class="icon-close">
+    <i class="fas fa-times"></i>
+  </div>
+
+  <?php
+  include('./footer.php');
+  ?>
+
   <script>
     const cartList = JSON.parse('<?php echo $cart ?>')
   </script>
   <script>
     const addToCart = () => {
       const quanlity = $('.sub__add-quanlity input')
-      let addQuanlity = quanlity.value
+      const addQuanlity = quanlity.value
 
       const id = '<?php echo $row['MSHH'] ?>'
       const name = '<?php echo $row['TenHH'] ?>'
@@ -348,9 +443,22 @@
       let isFind = false
       for (let i = 0; i < cartList.length; i++) {
         if (cartList[i].id == id) {
-          cartList[i].num++
-          isFind = true
-          break
+          if (addQuanlity) {
+            if (addQuanlity !== '1') {
+              cartList[i].num += Number.parseInt(addQuanlity)
+              addQuanlity.value = 1
+              isFind = true
+              break
+            } else {
+              cartList[i].num++
+              isFind = true
+              break
+            }
+          } else {
+            alert('Nhập số lượng!')
+            isFind = true
+            break
+          }
         }
       }
       if (!isFind) {
@@ -387,8 +495,63 @@
         $('header').classList.remove('sticky')
       }
     })
+
+    window.addEventListener('scroll', () => {
+      if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+        $('.scroll-top').classList.add('show')
+      } else {
+        $('.scroll-top').classList.remove('show')
+      }
+    })
   </script>
   <script src="./js/main-detail.js"></script>
+  <script>
+    // js for hover nav
+    const nav_item = [...$$('.header-item')]
+    const line = $('.line')
+
+    nav_item.forEach(function(item, index) {
+      item.onmouseover = () => {
+        line.style.left = item.offsetLeft + 'px'
+        line.style.width = item.offsetWidth + 'px'
+      }
+      item.onmouseout = () => {
+        line.style.width = 0 + 'px'
+        line.style.left = '207px'
+      }
+    })
+
+    $('.check-out').onclick = () => {
+      window.location.href = './checkout.php'
+    }
+  </script>
+
+  <script>
+    // search 
+    const search = $('.header-search')
+    const iconClose = $('.icon-close')
+    iconClose.onclick = function() {
+      $('.search-product').style.width = '0'
+      this.style.display = 'none'
+      document.body.style.overflow = 'auto'
+    }
+
+    const searchProduct = () => {
+      $('.search-product').style.width = 'auto'
+      document.body.style.overflow = 'hidden'
+      iconClose.style.display = 'flex'
+      let input = $('.search-product input')
+
+      input.style.display = 'block'
+    }
+
+    window.location.href.includes('?q=') ? window.scroll({
+      'top': 750,
+      'behavior': 'smooth'
+    }) : ''
+
+    search.addEventListener('click', searchProduct)
+  </script>
 </body>
 
 </html>

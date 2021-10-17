@@ -24,15 +24,15 @@
     <form action="QuanLyHangHoa/code.php" method="POST">
       <div class="form-group">
         <label>Tên Hàng Hóa</label>
-        <input required type="text" name="tenhanghoa" placeholder="Nhập tên hàng hóa:...">
+        <input required="text" name="tenhanghoa" placeholder="Nhập tên hàng hóa:...">
       </div>
       <div class="form-group">
         <label>Quy cách</label>
-        <textarea required id="editor" name="quycach"></textarea>
+        <textarea id="editor" name="quycach"></textarea>
       </div>
       <div class="form-group">
         <label>Nhập giá</label>
-        <input required type="text" name="gia" placeholder="Nhập giá:...">
+        <input required="text" name="gia" placeholder="Nhập giá:...">
       </div>
       <div class="form-group">
         <label>Nhập số lượng</label>
