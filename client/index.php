@@ -187,7 +187,7 @@
             } else {
               productList = data
 
-              if (productList.length < 8) {
+              if (productList.length <= 8) {
                 $('.load').style.display = 'none'
               }
 

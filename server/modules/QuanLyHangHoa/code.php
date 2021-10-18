@@ -16,10 +16,10 @@ if (isset($_POST['addsanpham'])) {
   $query = mysqli_query($mysqli, $sql_them);
 
   if ($query) {
-    $_SESSION['success'] = "Thêm hàng hóa thành công, <a href='../modules/index.php?action=themhinhanhhanghoatest'>Click để thêm hình ảnh hàng hóa</a href=''> !!!";
+    $_SESSION['success'] = "Thêm hàng hóa thành công, <a href='../modules/index.php?action=themhinhanhhanghoatest'>Click để thêm hình ảnh hàng hóa</a href=''>";
     header('Location:../../modules/index.php?action=themhanghoa');
   } else {
-    $_SESSION['status'] = "Thêm hàng hóa thất bại !!!";
+    $_SESSION['status'] = "Thêm hàng hóa thất bại";
     header('Location:../../modules/index.php?action=themhanghoa');
   }
 } else if (isset($_POST['edithanghoa'])) {
@@ -37,10 +37,10 @@ if (isset($_POST['addsanpham'])) {
   $query = mysqli_query($mysqli, $sql_sua);
 
   if ($query) {
-    $_SESSION['success'] = "Sửa hàng hóa thành công !!!";
+    $_SESSION['success'] = "Sửa hàng hóa thành công";
     header('Location:../../modules/index.php?action=danhsachhanghoa');
   } else {
-    $_SESSION['status'] = "Sửa hàng hóa thất bại !!!";
+    $_SESSION['status'] = "Sửa hàng hóa thất bại";
     header('Location:../../modules/index.php?action=suahanghoa');
   }
 } else {
@@ -56,16 +56,16 @@ if (isset($_POST['addsanpham'])) {
     $query_hh = mysqli_query($mysqli, $sql_xoa_hh);
 
     if ($query_hh) {
-      $_SESSION['success'] = "Xóa thành công !!!";
+      $_SESSION['success'] = "Xóa thành công";
       header('Location:../../modules/index.php?action=danhsachhanghoa');
     } else {
-      $_SESSION['status'] = "Xóa thất bại !!!";
+      $_SESSION['status'] = "Xóa thất bại";
       header('Location:../../modules/index.php?action=danhsachhanghoa');
     }
-    $_SESSION['success'] = "Xóa thành công !!!";
+    $_SESSION['success'] = "Xóa thành công";
     header('Location:../../modules/index.php?action=danhsachhanghoa');
   } else {
-    $_SESSION['status'] = "Xóa thất bại !!!";
+    $_SESSION['status'] = "Xóa thất bại";
     header('Location:../../modules/index.php?action=danhsachhanghoa');
   }
 }
