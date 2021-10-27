@@ -140,7 +140,7 @@
           ?>
 
         </div>
-        <p style="text-align:center" class="load"><a href="#loadMore" onclick="loadMore()" id="load-more">LoadMore</a></p>
+        <p style="text-align:center" class="load"><a href="#loadMore" onclick="loadMore()" id="load-more">Load More</a></p>
       </div>
     </div>
     <div class="search-product" id="search-form">

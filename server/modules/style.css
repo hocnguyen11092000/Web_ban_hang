@@ -4,8 +4,9 @@
   box-sizing: border-box;
   font-family: sans-serif;
 }
+
 html::-webkit-scrollbar {
-  width: 8px; 
+  width: 8px;
 }
 
 html::-webkit-scrollbar-track {
@@ -16,21 +17,26 @@ html::-webkit-scrollbar-thumb {
   background-color: rgb(204, 197, 197);
   border-radius: 20px;
 }
+
 table tr td th {
   border: none !important;
   border-radius: 0px !important;
 }
+
 li {
   list-style: none;
 }
+
 a {
   text-decoration: none;
 }
+
 h1 {
   text-align: center;
   padding: 20px 0;
   font-weight: 500;
 }
+
 .heading {
   text-align: center;
   margin-top: 20px;
@@ -59,6 +65,7 @@ h1 {
   max-width: calc(100% - 20%);
   background-color: #fff;
 }
+
 .wrapper .form {
   background-color: rgb(54 162 235 / 0%);
   width: 1000px;
@@ -67,9 +74,11 @@ h1 {
   border-radius: 10px;
   box-shadow: 0 7px 25px rgb(0 0 0 / 8%);
 }
+
 .form .form-group {
   padding: 15px;
 }
+
 .form .form-group label {
   margin-bottom: 10px;
   font-size: 16px;
@@ -77,6 +86,7 @@ h1 {
   display: inline-block;
   min-width: 200px;
 }
+
 .form .form-group input {
   min-width: 400px;
   padding: 12px 8px;
@@ -85,6 +95,7 @@ h1 {
   border-radius: 5px;
   border: 1px solid #ccc;
 }
+
 .form .form-group textarea {
   min-width: 400px;
   height: 500px;
@@ -95,6 +106,7 @@ h1 {
   border-radius: 5px;
   border: 1px solid #ccc;
 }
+
 .form .form-group .submit {
   margin-left: auto;
   padding: 10px 20px;
@@ -106,9 +118,11 @@ h1 {
   cursor: pointer;
   transition: 0.3s;
 }
+
 .right {
   text-align: right;
 }
+
 .form .form-group select {
   min-width: 400px;
   padding: 10px 5px;
@@ -117,21 +131,25 @@ h1 {
   border-radius: 5px;
   border: 1px solid #ccc;
 }
+
 .form .form-group .submit:hover {
   border: 1px solid #fff;
   background-color: rgb(54, 162, 235);
   color: #fff;
 }
+
 .sidebar__heading {
   color: #fff;
   text-align: left;
   font-size: 30px;
   margin-bottom: 20px;
 }
+
 .sidebar__list {
   display: flex;
   flex-direction: column;
 }
+
 .sidebar__list .item {
   text-align: left;
   width: 100%;
@@ -139,22 +157,26 @@ h1 {
   color: #fff;
   transition: 0.3s ease;
 }
+
 .sidebar__list .item:hover {
   background-color: #fff;
   color: #333;
   border-radius: 5px;
   cursor: pointer;
 }
+
 .sidebar__list .item a {
   color: inherit;
   margin-left: 10px;
   font-size: 16px;
   font-weight: 400;
 }
+
 .sub {
   display: none;
   transition: 0.3s ease;
 }
+
 .sub.show {
   display: block;
   transition: 0.3s;
@@ -164,9 +186,11 @@ h1 {
   padding: 10px 0;
   color: #333;
 }
+
 .sub .sub-item:hover {
   color: rgb(54, 162, 235);
 }
+
 .sub .sub-item a {
   font-size: 13px;
   color: inherit;
@@ -184,7 +208,38 @@ h1 {
   margin: 20px 0;
   font-weight: 400;
   background-color: #20c997;
+  transition: 0.3s ease;
+  animation: transform 1s forwards;
 }
+
+@keyframes transform {
+  0% {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(300px);
+  }
+
+  100% {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+  }
+}
+
+@keyframes transform_2 {
+  0% {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+  }
+
+  100% {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(-300px);
+  }
+}
+
 .noti_error {
   padding: 10px;
   font-weight: 400;
@@ -197,14 +252,17 @@ h1 {
   margin: 20px 0;
   font-weight: 400;
   background-color: rgb(255, 99, 132);
+  transition: 0.3s ease;
+  animation: transform 1s forwards;
 }
+
 .count-order {
   position: absolute;
   top: 30px;
   left: 230px;
-  min-width: 30px;
-  min-height: 30px;
-  padding: 5px;
+  min-width: 35px;
+  min-height: 35px;
+  /* padding: 5px; */
   font-size: 15px;
   color: #fff;
   background-color: #eb7b67;
@@ -215,13 +273,16 @@ h1 {
   animation: scale 2s infinite;
   transition: 0.3s ease;
 }
+
 @keyframes scale {
   0% {
     transform: scale(1);
   }
+
   50% {
     transform: scale(1.2);
   }
+
   100% {
     transform: scale(1);
   }

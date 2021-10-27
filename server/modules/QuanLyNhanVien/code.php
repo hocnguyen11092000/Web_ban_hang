@@ -13,10 +13,10 @@ if (isset($_POST['addnhanvien'])) {
   $query = mysqli_query($mysqli, $sql_them);
 
   if ($query) {
-    $_SESSION['success'] = "Thêm nhân viên thành công !!!";
+    $_SESSION['success'] = "Thêm nhân viên thành công";
     header('Location:../../modules/index.php?action=themnhanvien');
   } else {
-    $_SESSION['status'] = "Thêm nhân viên thất bại !!!";
+    $_SESSION['status'] = "Thêm nhân viên thất bại";
     header('Location:../../modules/index.php?action=themnhanvien');
   }
 } else if (isset($_POST['editnhanvien'])) {
@@ -31,10 +31,10 @@ if (isset($_POST['addnhanvien'])) {
   $query = mysqli_query($mysqli, $sql_sua);
 
   if ($query) {
-    $_SESSION['success'] = "Sửa nhân viên thành công !!!";
+    $_SESSION['success'] = "Sửa nhân viên thành công";
     header('Location:../../modules/index.php?action=danhsachnhanvien');
   } else {
-    $_SESSION['status'] = "Sửa nhân viên thất bại !!!";
+    $_SESSION['status'] = "Sửa nhân viên thất bại";
     header('Location:../../modules/index.php?action=danhsachnhanvien');
   }
 } else {
@@ -45,10 +45,10 @@ if (isset($_POST['addnhanvien'])) {
   $query = mysqli_query($mysqli, $sql);
 
   if ($query) {
-    $_SESSION['success'] = "Xóa nhân viên thành công !!!";
+    $_SESSION['success'] = "Xóa nhân viên thành công";
     header('Location:../../modules/index.php?action=danhsachnhanvien');
   } else {
-    $_SESSION['status'] = "Xóa nhân viên thất bại !!!";
+    $_SESSION['status'] = "Xóa nhân viên thất bại";
     header('Location:../../modules/index.php?action=danhsachnhanvien');
   }
 }

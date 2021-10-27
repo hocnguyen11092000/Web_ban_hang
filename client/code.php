@@ -93,7 +93,7 @@ if (isset($_POST['checkout'])) {
       $_SESSION['status'] = "Thêm đơn hàng thất bại !!!";
       header('location: checkout.php');
     }
-    $_SESSION['success'] = "Thanh toán thành công !!!";
+    // $_SESSION['success'] = "Thanh toán thành công !!!";
     header('location: success_checkout.php');
   } else {
     $_SESSION['status'] = "Thanh toán thất bại !!!";

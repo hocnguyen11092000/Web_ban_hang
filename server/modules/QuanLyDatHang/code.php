@@ -16,10 +16,10 @@ if (isset($_POST['editdathang'])) {
     $sql_nhanvien_sua = "UPDATE `dathang` SET `MSNV` = '" . $MSNV . "' WHERE `dathang`.`SoDonDH` = '" . $id . "'";
     $query_nhanvien_sua = mysqli_query($mysqli, $sql_nhanvien_sua);
 
-    $_SESSION['success'] = "Chỉnh sửa trạng thái đặt hàng thành công !!!";
+    $_SESSION['success'] = "Chỉnh sửa trạng thái đặt hàng thành công";
     header('Location:../../modules/index.php?action=danhsachtatcadonhang');
   } else {
-    $_SESSION['status'] = "Chỉnh sửa trạng thái đặt hàng thất bại !!!";
+    $_SESSION['status'] = "Chỉnh sửa trạng thái đặt hàng thất bại";
     header('Location:../../modules/index.php?action=danhsachtatcadonhang');
   }
 }

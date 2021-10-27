@@ -16,7 +16,7 @@ if (isset($_POST['addsanpham'])) {
   $query = mysqli_query($mysqli, $sql_them);
 
   if ($query) {
-    $_SESSION['success'] = "Thêm hàng hóa thành công, <a href='../modules/index.php?action=themhinhanhhanghoatest'>Click để thêm hình ảnh hàng hóa</a href=''>";
+    $_SESSION['success'] = "Thêm hàng hóa thành công, <a class='add-img' href='../modules/index.php?action=themhinhanhhanghoatest'>Click để thêm hình ảnh hàng hóa</a href=''>";
     header('Location:../../modules/index.php?action=themhanghoa');
   } else {
     $_SESSION['status'] = "Thêm hàng hóa thất bại";
@@ -38,7 +38,7 @@ if (isset($_POST['addsanpham'])) {
 
   if ($query) {
     $_SESSION['success'] = "Sửa hàng hóa thành công";
-    header('Location:../../modules/index.php?action=danhsachhanghoa');
+    header('Location:../../modules/index.php?action=danhsachhanghoa&page=1');
   } else {
     $_SESSION['status'] = "Sửa hàng hóa thất bại";
     header('Location:../../modules/index.php?action=suahanghoa');
@@ -46,26 +46,52 @@ if (isset($_POST['addsanpham'])) {
 } else {
   $id = $_GET['idhanghoa'];
 
-  $sql_xoa = "DELETE  FROM `hinhhanghoa` WHERE MSHH = '" . $id . "' ";
+  $sql_MSHH = "SELECT MSHH FROM `chitietdathang` WHERE 1";
+  $query_MSHH = mysqli_query($mysqli, $sql_MSHH);
+  $MSHH = [];
 
-  $query = mysqli_query($mysqli, $sql_xoa);
+  while ($row_MSHH = mysqli_fetch_array($query_MSHH)) {
+    $MSHH[] = $row_MSHH;
+  }
 
-  if ($query) {
-    $sql_xoa_hh = "DELETE FROM `hanghoa` WHERE MSHH = '" . $id . "' ";
+  $count = 0;
+  echo '<pre>';
+  var_dump($id);
+  var_dump($MSHH);
+  echo '</pre>';
 
-    $query_hh = mysqli_query($mysqli, $sql_xoa_hh);
+  foreach ($MSHH as $HH) {
+    if ($HH[0] == $id) {
+      $count++;
+    }
+  }
 
-    if ($query_hh) {
+  if ($count > 0) {
+    $_SESSION['status'] = "Không thể xóa sản phẩm vì nó đang nằm trong chi tiết đơn hàng";
+    header('Location:../../modules/index.php?action=danhsachhanghoa&page=1');
+    die();
+  } else {
+    $sql_xoa = "DELETE  FROM `hinhhanghoa` WHERE MSHH = '" . $id . "' ";
+
+    $query = mysqli_query($mysqli, $sql_xoa);
+
+    if ($query) {
+      $sql_xoa_hh = "DELETE FROM `hanghoa` WHERE MSHH = '" . $id . "' ";
+
+      $query_hh = mysqli_query($mysqli, $sql_xoa_hh);
+
+      if ($query_hh) {
+        $_SESSION['success'] = "Xóa thành công";
+        header('Location:../../modules/index.php?action=danhsachhanghoa');
+      } else {
+        $_SESSION['status'] = "Xóa thất bại";
+        header('Location:../../modules/index.php?action=danhsachhanghoa');
+      }
       $_SESSION['success'] = "Xóa thành công";
       header('Location:../../modules/index.php?action=danhsachhanghoa');
     } else {
       $_SESSION['status'] = "Xóa thất bại";
       header('Location:../../modules/index.php?action=danhsachhanghoa');
     }
-    $_SESSION['success'] = "Xóa thành công";
-    header('Location:../../modules/index.php?action=danhsachhanghoa');
-  } else {
-    $_SESSION['status'] = "Xóa thất bại";
-    header('Location:../../modules/index.php?action=danhsachhanghoa');
   }
 }

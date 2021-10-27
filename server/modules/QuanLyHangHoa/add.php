@@ -6,6 +6,10 @@
   .ck-blurred.ck.ck-content.ck-editor__editable.ck-rounded-corners.ck-editor__editable_inline {
     height: 200px;
   }
+
+  .add-img {
+    color: #333;
+  }
 </style>
 <div class="wrapper">
   <h1>Trang Thêm Hàng Hóa</h1>

@@ -152,11 +152,15 @@ session_start();
     const loadding = document.querySelector('.loadding')
     setTimeout(function() {
       loadding.style.display = 'none'
-    }, 500)
+    }, 400)
     const noti = document.querySelector('.noti_success')
     noti && (setTimeout(() => {
       noti.style.display = 'none'
-      noti.style.transition = '0.3s ease'
+    }, 5000))
+
+    const noti_err = document.querySelector('.noti_error')
+    noti_err && (setTimeout(() => {
+      noti_err.style.display = 'none'
     }, 5000))
   </script>
 </body>

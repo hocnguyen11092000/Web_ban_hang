@@ -9,10 +9,10 @@ if (isset($_POST['addloaisanpham'])) {
   $query = mysqli_query($mysqli, $sql);
 
   if ($query) {
-    $_SESSION['success'] = "Thêm loại hàng hóa thành công !!!";
+    $_SESSION['success'] = "Thêm loại hàng hóa thành công";
     header('Location:../../modules/index.php?action=danhsachloaihanghoa');
   } else {
-    $_SESSION['status'] = "Thêm loại hàng hóa thất bại !!!";
+    $_SESSION['status'] = "Thêm loại hàng hóa thất bại";
     header('Location:../../modules/index.php?action=danhsachloaihanghoa');
   }
 } else if (isset($_POST['editloaihanghoa'])) {
@@ -24,10 +24,10 @@ if (isset($_POST['addloaisanpham'])) {
   $query = mysqli_query($mysqli, $sql);
 
   if ($query) {
-    $_SESSION['success'] = "Sửa loại hàng hóa thành công !!!";
+    $_SESSION['success'] = "Sửa loại hàng hóa thành công";
     header('Location:../../modules/index.php?action=danhsachloaihanghoa');
   } else {
-    $_SESSION['status'] = "Sửa loại hàng hóa thất bại !!!";
+    $_SESSION['status'] = "Sửa loại hàng hóa thất bại";
     header('Location:../../modules/index.php?action=danhsachloaihanghoa');
   }
 } else {
@@ -38,10 +38,10 @@ if (isset($_POST['addloaisanpham'])) {
   $query = mysqli_query($mysqli, $sql);
 
   if ($query) {
-    $_SESSION['success'] = "Xóa loại hàng hóa thành công !!!";
+    $_SESSION['success'] = "Xóa loại hàng hóa thành công";
     header('Location:../../modules/index.php?action=danhsachloaihanghoa');
   } else {
-    $_SESSION['status'] = "Xóa loại hàng hóa thất bại !!!";
+    $_SESSION['status'] = "Xóa loại hàng hóa thất bại";
     header('Location:../../modules/index.php?action=danhsachloaihanghoa');
   }
 }
