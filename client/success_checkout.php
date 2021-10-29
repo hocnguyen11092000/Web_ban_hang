@@ -2,8 +2,8 @@
 include('../server/config/config.php');
 $tenkhachhang = '';
 $query_danh_sach_don_hang = '';
-if (isset($_POST['tenkhachhang'])) {
-  $tenkhachhang = trim($_POST['tenkhachhang']);
+if (isset($_GET['tenkhachhang'])) {
+  $tenkhachhang = trim($_GET['tenkhachhang']);
 
   $sql_ma_khach_hang = "SELECT MSKH FROM `khachhang` WHERE HoTenKH = '" . $tenkhachhang . "'";
   $query_ma_khach_hang = mysqli_query($mysqli, $sql_ma_khach_hang);
@@ -74,14 +74,14 @@ if (isset($_POST['tenkhachhang'])) {
 
     .login-client {
       position: fixed;
-      top: 0;
+      top: 20px;
       left: 50%;
       transform: translate(-50%, -140px);
       width: 400px;
       height: 140px;
       background-color: #fff;
       z-index: 10;
-      border-radius: 10px;
+      border-radius: 5px;
       box-shadow: 0px 7px 25px rgba(0 0 0 / 8%);
       opacity: 0;
       visibility: hidden;
@@ -127,7 +127,7 @@ if (isset($_POST['tenkhachhang'])) {
       left: 0;
       right: 0;
       bottom: 0;
-      background-color: #fff;
+      background-color: #333;
       opacity: 0;
       visibility: hidden;
       z-index: 0;
@@ -211,6 +211,13 @@ if (isset($_POST['tenkhachhang'])) {
       padding: 5px 8px;
       border-radius: 5px;
     }
+
+    .order {
+      opacity: 0;
+      visibility: hidden;
+      transition: 0.8s ease;
+      transform: translateY(-150px);
+    }
   </style>
 </head>
 
@@ -233,18 +240,18 @@ if (isset($_POST['tenkhachhang'])) {
       </div>
     </div>
     <div class="login-client">
-      <form action="" method="POST">
+      <form action="" method="GET">
         <div class="form-group">
           <label for="">Tên Khách Hàng: </label>
           <input name="tenkhachhang" type="text" placeholder="Nhập tên...">
         </div>
         <div class="form-group" style="text-align: right; padding-top:5px">
-          <button name="search-customer" class="btn-search-customer" type="submit">Tìm kiếm</button>
+          <button class="btn-search-customer" type="submit">Tìm kiếm</button>
         </div>
       </form>
     </div>
     <div class="blur"></div>
-    <div class="grid wide">
+    <div class="grid wide order">
       <div class="row">
         <div class="table-checkout col l-12 m-12 c-12">
           <h2 style="font-weight: 500; margin:10px">Danh sách đơn hàng: </h2>
@@ -311,6 +318,16 @@ if (isset($_POST['tenkhachhang'])) {
   blur.onclick = function() {
     this.classList.remove('active');
     document.querySelector('.login-client').classList.remove('active')
+  }
+
+  if (window.location.href.includes('?tenkhachhang=')) {
+    const order = document.querySelector('.order')
+
+    Object.assign(order.style, {
+      opacity: '1',
+      visibility: 'visible',
+      transform: 'translateY(0)'
+    })
   }
 </script>
 

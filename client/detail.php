@@ -33,6 +33,11 @@
     .imgBox {
       width: 100%;
       position: relative;
+      padding: 20px;
+      background-color: #fff;
+      box-shadow: 0 7px 25px rgba(0 0 0 / 8%);
+      border-radius: 10px;
+      min-height: 592px;
     }
 
     .imgBox img {
@@ -214,6 +219,14 @@
       position: relative;
     }
 
+    .sub {
+      padding: 20px;
+      background-color: #fff;
+      box-shadow: 0px 7px 25px rgba(0 0 0 / 8%);
+      border-radius: 10px;
+      min-height: 592px;
+    }
+
     .sub__name {
       font-size: 18px;
       font-weight: bold;
@@ -228,6 +241,14 @@
       color: rgb(255, 99, 132);
       font-weight: bold;
     }
+
+    /* .sub__specification {
+      margin: 50px 0;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 7px 25px rgba(0 0 0 / 8%);
+    } */
 
     .sub__specification img {
       width: 100%;

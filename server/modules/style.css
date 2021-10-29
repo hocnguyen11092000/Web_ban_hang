@@ -5,6 +5,10 @@
   font-family: sans-serif;
 }
 
+h3 {
+  font-weight: 500 !important;
+}
+
 html::-webkit-scrollbar {
   width: 8px;
 }
@@ -56,7 +60,8 @@ h1 {
   flex-basis: 20%;
   max-width: 20%;
   border-radius: 10px;
-  background-color: rgb(44, 143, 209);
+  background-color: #fff;
+  box-shadow: 0px 7px 25px rgba(0 0 0 / 8%);
 }
 
 .wrapper {
@@ -139,10 +144,11 @@ h1 {
 }
 
 .sidebar__heading {
-  color: #fff;
+  color: #087ea6;
   text-align: left;
   font-size: 30px;
   margin-bottom: 20px;
+  font-weight: 500;
 }
 
 .sidebar__list {
@@ -154,12 +160,12 @@ h1 {
   text-align: left;
   width: 100%;
   padding: 10px 6px;
-  color: #fff;
-  transition: 0.3s ease;
+  color: #333;
+  transition: 0.2s ease;
 }
 
 .sidebar__list .item:hover {
-  background-color: #fff;
+  background-color: #f5f6f7;
   color: #333;
   border-radius: 5px;
   cursor: pointer;

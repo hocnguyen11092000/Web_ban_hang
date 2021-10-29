@@ -265,6 +265,13 @@ $query_lietke_hh = mysqli_query($mysqli, $sql_lietke_hh);
         a.href += input.value
       }
     }
+
+    input.onkeyup = (e) => {
+      if (e.keyCode === 13) {
+        window.location.href += `&q=${input.value}`
+      }
+    }
+
     window.addEventListener('click', search)
 
     const paginate = document.querySelectorAll('.pagination .list .item')
