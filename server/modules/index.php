@@ -13,6 +13,7 @@ session_start();
   <script src="https://cdn.ckeditor.com/ckeditor5/30.0.0/classic/ckeditor.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.1/chart.min.js"></script>
   <link rel="stylesheet" href="./style.css">
+  <title>Trang quản trị</title>
   <style>
     .loadding {
       position: fixed;
@@ -93,7 +94,6 @@ session_start();
       color: #444;
     }
   </style>
-  <title>index</title>
 </head>
 
 <body>

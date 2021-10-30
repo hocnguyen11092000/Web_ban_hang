@@ -84,7 +84,7 @@ const searchProduct = () => {
   input.style.display = 'block'
 }
 
-window.location.href.includes('?q=') ? window.scroll({ 'top': 750, 'behavior': 'smooth' }) : ''
+window.location.href.includes('?q=') ? window.scroll({ 'top': 1050, 'behavior': 'smooth' }) : ''
 
 search.addEventListener('click', searchProduct)
 

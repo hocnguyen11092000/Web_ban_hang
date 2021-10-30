@@ -577,7 +577,7 @@
     }
 
     window.location.href.includes('?q=') ? window.scroll({
-      'top': 750,
+      'top': 1050,
       'behavior': 'smooth'
     }) : ''
 

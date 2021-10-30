@@ -2,6 +2,13 @@
 session_start();
 include('../server/config/config.php');
 
+// $sql_soluonghang = "SELECT SoLuongHang FROM `hanghoa` WHERE MSHH = 52";
+// $query_soluonghang = mysqli_query($mysqli, $sql_soluonghang);
+
+// $row_soluonghang = mysqli_fetch_array($query_soluonghang);
+// $row_count = (int)($row_soluonghang[0]);
+// var_dump($row_count);
+// die();
 if (isset($_POST['checkout'])) {
   $hoten = $_POST['hoten'];
   $tencongty = $_POST['tencongty'];
@@ -74,29 +81,46 @@ if (isset($_POST['checkout'])) {
 
         $query_them_chitietdh = mysqli_query($mysqli, $sql_them_chitietdh);
         if ($query_them_chitietdh) {
+
+          $sql_soluonghang = "SELECT SoLuongHang FROM `hanghoa` WHERE MSHH = '" . $mshh_int . "'";
+          $query_soluonghang = mysqli_query($mysqli, $sql_soluonghang);
+
+          $row_soluonghang = mysqli_fetch_array($query_soluonghang);
+          $row_count = (int)($row_soluonghang[0]);
+          $num_end = $row_count - $num;
+          // var_dump($num_end);
+          // die();
+          $sql_update_count = "UPDATE hanghoa set SoLuongHang = '" . $num_end . "' WHERE hanghoa.MSHH = '" . $mshh_int . "'";
+          $query_upadate_count = mysqli_query($mysqli, $sql_update_count);
+
+          if ($query_upadate_count) {
+            //$_SESSION['success'] = "Update thành công";
+          } else {
+            $_SESSION['status'] = "Update thất bại";
+          }
           if (isset($_COOKIE['cart'])) {
             setcookie("cart", "", time() - 60, "/", "", 0);
           }
         } else {
-          $_SESSION['status'] = "Thêm chi tiet đơn hàng thất bại !!!";
+          $_SESSION['status'] = "Thêm chi tiet đơn hàng thất bại";
           header('location: checkout.php');
         }
       }
       if (isset($_COOKIE['cart'])) {
         setcookie("cart", "", time() - 60, "/", "", 0);
-        $_SESSION['success'] = "Thêm chi tiet đơn hàng thành công !!!";
+        //$_SESSION['success'] = "Thêm chi tiet đơn hàng thành công";
         header('location: checkout.php');
       }
-      $_SESSION['success'] = "Thêm đơn hàng thành công !!!";
+      // $_SESSION['success'] = "Thêm đơn hàng thành công";
       header('location: checkout.php');
     } else {
-      $_SESSION['status'] = "Thêm đơn hàng thất bại !!!";
+      $_SESSION['status'] = "Thêm đơn hàng thất bại";
       header('location: checkout.php');
     }
     // $_SESSION['success'] = "Thanh toán thành công !!!";
     header('location: success_checkout.php');
   } else {
-    $_SESSION['status'] = "Thanh toán thất bại !!!";
+    $_SESSION['status'] = "Thanh toán thất bại";
     header('location: checkout.php');
   }
 }

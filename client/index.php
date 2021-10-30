@@ -87,70 +87,117 @@
 
         </div>
       </div>
-      <div class="grid wide">
-        <h2 class="product-heading">
-          Danh sách sản phẩm:
-        </h2>
+      <div class="grid wide category">
+        <h2>Danh mục sản phẩm: </h2>
+        <div class="row">
+          <?php
+          $sql_loaihanghoa = "SELECT * FROM `loaihanghoa`";
+          $query_loaihanghoa = mysqli_query($mysqli, $sql_loaihanghoa);
+          $item = 5;
+          $path = "/work-single-";
+          while ($row_loaihanghoa = mysqli_fetch_array($query_loaihanghoa)) {
+            $item++;
+            if ($item > 7) {
+              $item = 0;
+            }
+          ?>
 
-        <?php
+            <div class="col l-4 m-4 c-12 category-item">
+              <a href="category.php?id=<?php echo $row_loaihanghoa['MaLoaiHang'] ?>">
+                <div class="imgBox">
+                  <img src="../images/<?php if ($item == 0) {
+                                        echo 'card2.png';
+                                      } else {
+                                        echo $path . $item . '.jpg';
+                                      }  ?>" alt="">
+                  <span class="text-category">Danh mục</span>
+                  <h3 class="text-phone"><?php echo $row_loaihanghoa['TenLoaiHang'] ?></h3>
+                </div>
+              </a>
+            </div>
+          <?php } ?>
 
-        if (isset($_GET['q'])) {
-          $sql_count = 'SELECT COUNT(hanghoa.MSHH) AS "soluong" FROM `hanghoa`, `hinhhanghoa` WHERE hanghoa.MSHH = hinhhanghoa.MSHH AND hanghoa.TenHH LIKE "%' . $_GET['q'] . '%" ORDER BY hanghoa.MSHH DESC ';
-          $query_count = mysqli_query($mysqli, $sql_count);
-          $row_count = mysqli_fetch_array($query_count);
-          $count = $row_count['soluong'];
 
-          if (isset($row_count)) {
-            echo "<span class='search-count'>Tìm thấy '" . $count . "' sản phẩm</span>";
-          }
-        }
-        ?>
-        <div class="row product-list" id="result">
+          <!-- <div class="col l-4 m-4 c-12 category-item">
+            <div class="imgBox">
+              <img src="../images/work-single-7.jpg" alt="">
+              <span class="text-category">Danh mục</span>
+              <h3 class="text-phone">Laptop</h3>
+            </div>
+          </div>
+          <div class="col l-4 m-4 c-12 category-item">
+            <div class="imgBox">
+              <img src="../images/card2.png" alt="">
+              <span class="text-category">Danh mục</span>
+              <h3 class="text-phone">Đồng hồ</h3>
+            </div>
+          </div>
+          </div> -->
+        </div>
+        <div class="grid wide">
+          <h2 class="product-heading">
+            Danh sách sản phẩm:
+          </h2>
+
           <?php
 
           if (isset($_GET['q'])) {
-            $sql_lietke_hh = 'SELECT * FROM `hanghoa`, `hinhhanghoa` WHERE hanghoa.MSHH = hinhhanghoa.MSHH AND hanghoa.TenHH LIKE "%' . $_GET['q'] . '%" ORDER BY hanghoa.MSHH DESC ';
-          } else {
-            $sql_lietke_hh = "SELECT * FROM `hanghoa`, `hinhhanghoa` WHERE hanghoa.MSHH = hinhhanghoa.MSHH ORDER BY hanghoa.MSHH DESC LIMIT 0, 8";
+            $sql_count = 'SELECT COUNT(hanghoa.MSHH) AS "soluong" FROM `hanghoa`, `hinhhanghoa` WHERE hanghoa.MSHH = hinhhanghoa.MSHH AND hanghoa.TenHH LIKE "%' . $_GET['q'] . '%" ORDER BY hanghoa.MSHH DESC ';
+            $query_count = mysqli_query($mysqli, $sql_count);
+            $row_count = mysqli_fetch_array($query_count);
+            $count = $row_count['soluong'];
+
+            if (isset($row_count)) {
+              echo "<span class='search-count'>Tìm thấy '" . $count . "' sản phẩm</span>";
+            }
           }
-
-          $query = mysqli_query($mysqli, $sql_lietke_hh);
-
-          while ($row = mysqli_fetch_array($query)) {
           ?>
-            <div class="product col l-3 m-4 c-12">
-              <div class="product-container">
-                <div class="product__img">
-                  <a href="detail.php?id=<?php echo $row['MSHH'] ?>">
-                    <img src="../images/<?php echo $row['TenHinh'] ?>" alt="">
+          <div class="row product-list" id="result">
+            <?php
+
+            if (isset($_GET['q'])) {
+              $sql_lietke_hh = 'SELECT * FROM `hanghoa`, `hinhhanghoa` WHERE hanghoa.MSHH = hinhhanghoa.MSHH AND hanghoa.TenHH LIKE "%' . $_GET['q'] . '%" ORDER BY hanghoa.MSHH DESC ';
+            } else {
+              $sql_lietke_hh = "SELECT * FROM `hanghoa`, `hinhhanghoa` WHERE hanghoa.MSHH = hinhhanghoa.MSHH ORDER BY hanghoa.MSHH DESC LIMIT 0, 8";
+            }
+
+            $query = mysqli_query($mysqli, $sql_lietke_hh);
+
+            while ($row = mysqli_fetch_array($query)) {
+            ?>
+              <div class="product col l-3 m-4 c-12">
+                <div class="product-container">
+                  <div class="product__img">
+                    <a href="detail.php?id=<?php echo $row['MSHH'] ?>">
+                      <img src="../images/<?php echo $row['TenHinh'] ?>" alt="">
+                    </a>
+                  </div>
+                  <a class="product__name" href="detail.php?id=<?php echo $row['MSHH'] ?>">
+                    <p>
+                      <?php echo $row['TenHH'] ?>
+                    </p>
                   </a>
-                </div>
-                <a class="product__name" href="detail.php?id=<?php echo $row['MSHH'] ?>">
-                  <p>
-                    <?php echo $row['TenHH'] ?>
+                  <p class="product__price">
+                    <?php echo $row['Gia'] . ' trieu' ?>
                   </p>
-                </a>
-                <p class="product__price">
-                  <?php echo $row['Gia'] . ' trieu' ?>
-                </p>
+                </div>
               </div>
-            </div>
-          <?php
-          }
-          ?>
+            <?php
+            }
+            ?>
 
+          </div>
+          <p style="text-align:center" class="load"><a href="#loadMore" onclick="loadMore()" id="load-more">Load More</a></p>
         </div>
-        <p style="text-align:center" class="load"><a href="#loadMore" onclick="loadMore()" id="load-more">Load More</a></p>
       </div>
-    </div>
-    <div class="search-product" id="search-form">
-      <form action="index.php" method="GET">
-        <input type="text" name="q" placeholder="Tìm kiếm...">
-      </form>
-    </div>
-    <div class="icon-close">
-      <i class="fas fa-times"></i>
-    </div>
+      <div class="search-product" id="search-form">
+        <form action="index.php" method="GET">
+          <input type="text" name="q" placeholder="Tìm kiếm...">
+        </form>
+      </div>
+      <div class="icon-close">
+        <i class="fas fa-times"></i>
+      </div>
   </main>
 
   <?php
@@ -217,7 +264,7 @@
           .then(() => {
             height++
             window.scroll({
-              top: 1520 * height,
+              top: 1920 * height,
               behavior: 'smooth'
             });
           })
