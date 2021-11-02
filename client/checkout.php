@@ -147,6 +147,29 @@
       margin-top: 10px;
       cursor: pointer;
     }
+
+    @keyframes bottom-to-top {
+      0% {
+        opacity: 0;
+        transform: translateY(150px);
+      }
+
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .grid.wide.table,
+    .grid.wide.form {
+      opacity: 0;
+      animation: bottom-to-top 1s forwards;
+      transition: 0.3s ease;
+    }
+
+    .grid.wide.form {
+      animation-delay: 0.5s;
+    }
   </style>
 
   <?php
@@ -194,7 +217,7 @@
       </div>
     </div>
   </div>
-  <div class="grid wide">
+  <div class="grid wide table">
     <div class="row">
       <div class="table-checkout col l-12 m-12 c-12">
         <h2 style="font-weight: 500; margin:10px">Danh sách đơn hàng: </h2>

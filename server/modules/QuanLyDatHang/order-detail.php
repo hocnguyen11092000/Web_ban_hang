@@ -5,9 +5,15 @@
     object-fit: cover;
   }
 
+  body {
+    overflow: auto;
+  }
+
   #main {
     flex: 1;
     margin-left: 20px;
+    margin-bottom: 50px;
+    position: relative;
   }
 
   table,
@@ -38,7 +44,7 @@
   }
 
   h2 {
-    margin: 20px;
+    margin: 25px;
     font-weight: 600;
   }
 
@@ -81,9 +87,57 @@
     padding: 5px 8px;
     border-radius: 5px;
   }
+
+  .even {
+    background-color: #699;
+  }
+</style>
+<style>
+  .loading {
+    opacity: 0;
+    display: flex;
+    position: absolute;
+    bottom: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: opacity .3s ease-in;
+  }
+
+  .loading.show {
+    opacity: 1;
+  }
+
+  .ball {
+    background-color: #777;
+    border-radius: 50%;
+    margin: 5px;
+    height: 10px;
+    width: 10px;
+    animation: jump .5s ease-in infinite;
+  }
+
+  .ball:nth-of-type(2) {
+    animation-delay: 0.1s;
+  }
+
+  .ball:nth-of-type(3) {
+    animation-delay: 0.2s;
+  }
+
+  @keyframes jump {
+
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+
+    50% {
+      transform: translateY(-10px);
+    }
+  }
 </style>
 <?php
-$sql_lietke_chi_tiet_dathang = "SELECT * FROM `chitietdathang`";
+$sql_lietke_chi_tiet_dathang = "SELECT * FROM `chitietdathang` LIMIT 0, 12";
 $query_lietke_chitiet_dathang = mysqli_query($mysqli, $sql_lietke_chi_tiet_dathang);
 ?>
 <?php
@@ -99,7 +153,7 @@ if (isset($_COOKIE['cart'])) {
 
 <main id="main">
   <h2 style="font-weight: 500;">Danh sách chi tiết đơn hàng:</h2>
-  <table style="width:100%">
+  <table style="width:100%" id="results">
     <?php
 
     if (isset($_SESSION['success']) && $_SESSION['success'] != "") {
@@ -149,4 +203,89 @@ if (isset($_COOKIE['cart'])) {
     ?>
 
   </table>
+  <div class="loading">
+    <div class="ball"></div>
+    <div class="ball"></div>
+    <div class="ball"></div>
+  </div>
 </main>
+
+<script>
+  const loading = document.querySelector('.loading');
+
+  const fetchData = () => {
+    fetch(`QuanLyDatHang/load-more-order-detail.php?page=${page}`)
+      .then(response => response.json())
+      .then(data => {
+        console.log(data);
+        if (Object.entries(data).length === 0) {
+          loading.style.display = 'none'
+        } else {
+          const results = document.querySelector('#results');
+
+          // if (data.length <= 12) {
+          //   loading.style.display = 'none'
+          // }
+          Array.from(data).forEach(function(item) {
+            index++
+            results.innerHTML += `
+               <tr>
+                <td style="width: 20px">
+                ${index}
+                </td>
+                  <td>
+                  ${item.SoDonDH}
+                  </td>
+                  <td>
+                  ${item['MSHH']}
+                  </td>
+                  <td>
+                  ${item.SoLuong}
+                  </td>
+                  <td>
+                    ${item.GiaDatHang}
+                  </td>
+                  <td>
+                    ${item.GiamGia}
+                  </td>
+              </tr>
+                    `
+          })
+          loading.classList.remove('show');
+        }
+
+      })
+
+  }
+
+
+  let page = 1
+  let index = 12
+  window.addEventListener('scroll', () => {
+
+    const {
+      scrollTop,
+      scrollHeight,
+      clientHeight
+    } = document.documentElement;
+
+    console.log({
+      scrollTop,
+      scrollHeight,
+      clientHeight
+    });
+
+    function showLoading() {
+      loading.classList.add('show');
+
+      // load more data
+      setTimeout(fetchData, 1000)
+    }
+    if (clientHeight + scrollTop >= scrollHeight) {
+      page = page + 1
+      // show the loading animation
+      showLoading();
+    }
+
+  })
+</script>

@@ -266,12 +266,12 @@ h1 {
   position: absolute;
   top: 30px;
   left: 230px;
-  min-width: 35px;
-  min-height: 35px;
+  min-width: 32px;
+  min-height: 32px;
   /* padding: 5px; */
   font-size: 15px;
   color: #fff;
-  background-color: #eb7b67;
+  background-color: #087ea6;
   border-radius: 50%;
   display: flex;
   justify-content: center;

@@ -46,7 +46,14 @@ $query_sua_dathang = mysqli_query($mysqli, $sql_sua_dathang);
               <?php
               if ($row['MSNV'] == $row_nhanvien['MSNV']) {
               ?>
-                <option selected value="<?php echo $row_nhanvien['MSNV'] ?>"><?php echo $row_nhanvien['HoTenNV'] ?></option>
+                <option selected value="<?php echo $row_nhanvien['MSNV'] ?>">
+                  <?php
+                  if ($row_nhanvien['HoTenNV'] == '') {
+                    echo "Chọn nhân viên chỉnh sửa";
+                  } else {
+                    echo $row_nhanvien['HoTenNV'];
+                  }
+                  ?></option>
               <?php
               } else {
               ?>

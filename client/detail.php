@@ -38,6 +38,9 @@
       box-shadow: 0 7px 25px rgba(0 0 0 / 8%);
       border-radius: 10px;
       min-height: 592px;
+      opacity: 0;
+      animation: left-to-right 1s forwards;
+      transition: 0.3s ease;
     }
 
     .imgBox img {
@@ -225,6 +228,9 @@
       box-shadow: 0px 7px 25px rgba(0 0 0 / 8%);
       border-radius: 10px;
       min-height: 592px;
+      opacity: 0;
+      animation: right-to-left 1s forwards;
+      transition: 0.3s ease;
     }
 
     .sub__name {
@@ -329,6 +335,30 @@
       font-size: 13px;
       padding: 2px 5px;
       border-radius: 5px;
+    }
+
+    @keyframes left-to-right {
+      0% {
+        opacity: 0;
+        transform: translateX(-150px);
+      }
+
+      100% {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes right-to-left {
+      0% {
+        opacity: 0;
+        transform: translateX(150px);
+      }
+
+      100% {
+        opacity: 1;
+        transform: translateX(0);
+      }
     }
   </style>
 </head>
