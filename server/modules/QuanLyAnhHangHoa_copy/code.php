@@ -13,7 +13,7 @@ if (isset($_POST['addAnhsanpham'])) {
     move_uploaded_file($_FILES["anhhanghoa"]["tmp_name"], "upload/" . $_FILES["anhhanghoa"]["name"]);
 
     $_SESSION['success'] = "Thêm hình ảnh hàng hóa thành công!";
-    header('Location:../../modules/index.php?action=danhsachhinhanhhanghoatest');
+    header('Location:../../modules/index.php?action=danhsachhanghoa&page=1');
   } else {
     $_SESSION['status'] = "Thêm hình ảnh hàng hóa thành công!";
     header('Location:../../modules/index.php?action=danhsachhinhanhhanghoatest');

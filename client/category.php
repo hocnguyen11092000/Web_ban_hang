@@ -33,7 +33,28 @@
 
     .heading {
       font-weight: 500;
-      margin: 20px 0;
+      margin: 10px 0;
+    }
+
+    .sort {
+      text-align: right;
+      margin-bottom: 15px;
+    }
+
+    .sort span {
+      margin-left: 10px;
+      font-size: 14px;
+      color: #333;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    .sort span:hover {
+      color: rgb(54, 162, 235);
+    }
+
+    .sort span.active {
+      color: rgb(54, 162, 235);
     }
   </style>
 </head>
@@ -58,14 +79,18 @@
 
       echo "<h2 class='heading'>" . $row['TenLoaiHang'] . "</h2>";
       ?>
-
+      <div class="row">
+        <div class="col l-12 m-12 c-12 sort">
+          <span onclick=sortDesc(this) class="sort_desc">Giá cao xuống thấp</span>
+          <span onclick=sortAsc(this) class="sort_asc">Giá thấp tới cao</span>
+        </div>
+      </div>
       <div class="row product-list">
         <?php
         if (isset($_GET['id'])) {
           $id = $_GET['id'];
         }
-
-        $sql_loaihang = "SELECT * FROM `hanghoa`,`hinhhanghoa` WHERE MaLoaiHang = '" . $id . "' and hanghoa.MSHH = hinhhanghoa.MSHH";
+        $sql_loaihang = "SELECT * FROM `hanghoa`,`hinhhanghoa` WHERE MaLoaiHang = '" . $id . "' and hanghoa.MSHH = hinhhanghoa.MSHH ORDER BY hanghoa.MSHH DESC";
         $query_loaihang = mysqli_query($mysqli, $sql_loaihang);
 
         while ($row_loaihoang = mysqli_fetch_array($query_loaihang)) {
@@ -152,6 +177,76 @@
   }) : ''
 
   search.addEventListener('click', searchProduct)
+</script>
+
+<script>
+  const id = location.search.slice(4)
+  const screen = document.querySelector('.product-list')
+
+  const sortDesc = async function(that) {
+
+    that.classList.add('active')
+    that.nextElementSibling.classList.remove('active')
+    const respone = await fetch(`sortApi.php?id=${id}&price=desc`)
+    const data = await respone.json()
+
+    const result = data.map((item, index) => {
+      return `
+      <div class="product col l-3 m-4 c-12">
+            <div class="product-container">
+              <div class="product__img">
+                <a href="detail.php?id=${item.MSHH}">
+                  <img src="../images/${item.TenHinh}" alt="">
+                </a>
+              </div>
+              <a class="product__name" href="detail.php?id=${item.MSHH}">
+                <p>
+                  ${item.TenHH}
+                </p>
+              </a>
+              <p class="product__price">
+                ${item.Gia}  triệu 
+              </p>
+            </div>
+
+          </div>
+      `
+    })
+
+    screen.innerHTML = result.join('')
+  }
+  const sortAsc = async function(that) {
+
+    that.classList.add('active')
+    that.previousElementSibling.classList.remove('active')
+    const respone = await fetch(`sortApi.php?id=${id}&price=asc`)
+    const data = await respone.json()
+
+    const result = data.map((item, index) => {
+      return `
+      <div class="product col l-3 m-4 c-12">
+            <div class="product-container">
+              <div class="product__img">
+                <a href="detail.php?id=${item.MSHH}">
+                  <img src="../images/${item.TenHinh}" alt="">
+                </a>
+              </div>
+              <a class="product__name" href="detail.php?id=${item.MSHH}">
+                <p>
+                  ${item.TenHH}
+                </p>
+              </a>
+              <p class="product__price">
+                ${item.Gia}  triệu 
+              </p>
+            </div>
+
+          </div>
+      `
+    })
+
+    screen.innerHTML = result.join('')
+  }
 </script>
 
 </html>

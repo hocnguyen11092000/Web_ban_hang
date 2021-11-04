@@ -31,10 +31,16 @@
     background-color: #fff;
   } */
 
-  table {
+  /* table {
     margin-top: 60px;
     padding: 10px;
     box-shadow: 0 7px 25px rgb(0 0 0 / 8%);
+  } */
+  .BOX {
+    margin-top: 60px;
+    padding: 20px;
+    box-shadow: 0 7px 25px rgb(0 0 0 / 8%);
+    border-radius: 5px;
   }
 
   th {
@@ -180,63 +186,65 @@ $query_lietke_hh = mysqli_query($mysqli, $sql_lietke_hh);
     <input class="input-search" type="text" style="margin-top: 15px; margin-bottom: 15px; border-radius: 5px; color: blue;" placeholder="Tìm kiếm tên sản phẩm... ">
     <a href="index.php?action=danhsachhanghoa&q=" class="btn-search">tìm kiếm</a>
   </div>
-  <table style="width:100%">
-    <?php
+  <div class="BOX">
+    <table style="width:100%">
+      <?php
 
-    if (isset($_SESSION['success']) && $_SESSION['success'] != "") {
-      echo '<h2 class="noti_success" >' . $_SESSION['success'] . '</h2>';
-      unset($_SESSION['success']);
-    }
-    if (isset($_SESSION['status']) && isset($_SESSION['status']) != "") {
-      echo '<h2 class="noti_error">' . $_SESSION['status'] . '</h2>';
-      unset($_SESSION['status']);
-    }
-    ?>
-    <tr>
-      <th>Id</th>
-      <th>Tên hàng hóa</th>
-      <th>Hình ảnh</th>
-      <th>Giá hàng hóa</th>
-      <th>Số lượng</th>
-      <th>Mã loại hàng hóa</th>
-      <th>Quản lý</th>
-    </tr>
-    <?php
-
-    // $sql = 'select * from sanpham limit ' . $index . ', 8';
-
-    //  $query_lietke_hh = mysqli_query($mysqli, $sql_lietke_hh);
-    $i = 0;
-    while ($row = mysqli_fetch_array($query_lietke_hh)) {
-      $i++;
-    ?>
+      if (isset($_SESSION['success']) && $_SESSION['success'] != "") {
+        echo '<h2 class="noti_success" >' . $_SESSION['success'] . '</h2>';
+        unset($_SESSION['success']);
+      }
+      if (isset($_SESSION['status']) && isset($_SESSION['status']) != "") {
+        echo '<h2 class="noti_error">' . $_SESSION['status'] . '</h2>';
+        unset($_SESSION['status']);
+      }
+      ?>
       <tr>
-        <td style="width: 50px">
-          <?php echo $row['MSHH'] ?>
-        </td>
-        <td>
-          <?php echo $row['TenHH'] ?>
-        </td>
-        <td><img src="../../images/<?php echo $row['TenHinh'] ?>" alt=""></td>
-        <td>
-          <?php echo $row['Gia'] ?>
-        </td>
-        <td>
-          <?php echo $row['SoLuongHang'] ?>
-        </td>
-        <td>
-          <?php echo $row['MaLoaiHang'] ?>
-        </td>
-        <td>
-          <a class="delete" href="QuanLyHangHoa/code.php?idhanghoa=<?php echo $row['MSHH'] ?>">Xoá</a>
-          <a class="edit" href="?action=suahanghoa&idhanghoa=<?php echo $row['MSHH'] ?>">Sửa</a>
-        </td>
+        <th>Id</th>
+        <th>Tên hàng hóa</th>
+        <th>Hình ảnh</th>
+        <th>Giá hàng hóa</th>
+        <th>Số lượng</th>
+        <th>Mã loại hàng hóa</th>
+        <th>Quản lý</th>
       </tr>
-    <?php
-    }
-    ?>
+      <?php
 
-  </table>
+      // $sql = 'select * from sanpham limit ' . $index . ', 8';
+
+      //  $query_lietke_hh = mysqli_query($mysqli, $sql_lietke_hh);
+      $i = 0;
+      while ($row = mysqli_fetch_array($query_lietke_hh)) {
+        $i++;
+      ?>
+        <tr>
+          <td style="width: 50px">
+            <?php echo $row['MSHH'] ?>
+          </td>
+          <td>
+            <?php echo $row['TenHH'] ?>
+          </td>
+          <td><img src="../../images/<?php echo $row['TenHinh'] ?>" alt=""></td>
+          <td>
+            <?php echo $row['Gia'] ?>
+          </td>
+          <td>
+            <?php echo $row['SoLuongHang'] ?>
+          </td>
+          <td>
+            <?php echo $row['MaLoaiHang'] ?>
+          </td>
+          <td>
+            <a class="delete" href="QuanLyHangHoa/code.php?idhanghoa=<?php echo $row['MSHH'] ?>">Xoá</a>
+            <a class="edit" href="?action=suahanghoa&idhanghoa=<?php echo $row['MSHH'] ?>">Sửa</a>
+          </td>
+        </tr>
+      <?php
+      }
+      ?>
+
+    </table>
+  </div>
 
   <div class="pagination">
     <ul class="list">

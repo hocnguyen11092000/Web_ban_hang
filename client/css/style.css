@@ -84,8 +84,8 @@ header.sticky {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  animation: left-to-right 1s forwards;
-  transition: 0.3s ease;
+  /* animation: left-to-right 1s forwards;
+  transition: 0.3s ease; */
 }
 
 .header-container .header-list {
@@ -169,10 +169,10 @@ header.sticky {
   height: 100%;
   position: relative;
   overflow: hidden;
-  animation: right-to-left 1s forwards;
+  /* animation: right-to-left 1s forwards;
   transition: 0.3s ease;
   animation-delay: 1s;
-  opacity: 0;
+  opacity: 0; */
 }
 
 .main__slider .left-slider .slider-control-pre {
@@ -216,10 +216,10 @@ header.sticky {
 .main__slider .right {
   flex: 1;
   height: 100%;
-  animation: left-to-right 1s forwards;
+  /* animation: left-to-right 1s forwards;
   transition: 0.3s ease;
   animation-delay: 1s;
-  opacity: 0;
+  opacity: 0; */
 }
 
 .main__slider .left-slider .imgBox {
@@ -427,10 +427,10 @@ p.load a#load-more span {
   right: 230px;
   z-index: 2;
   cursor: pointer;
-  opacity: 0;
+  /* opacity: 0;
   animation: right-to-left-icon 1s forwards;
   animation-delay: 2s;
-  transition: 0.3s ease;
+  transition: 0.3s ease; */
 }
 
 .productSlider-control-pre i {
@@ -460,12 +460,13 @@ p.load a#load-more span {
   top: 30px;
   right: 200px;
   z-index: 2;
+  transform: translateY(-20px);
   cursor: pointer;
-  opacity: 0;
+  /* opacity: 0;
   animation: right-to-left-icon 1s forwards;
   animation-delay: 2s;
-  transition: 0.3s ease;
-  transform: translateY(-20px);
+  transition: 0.3s ease;*/
+
 }
 
 .productSlider .product {
@@ -482,20 +483,20 @@ p.load a#load-more span {
   margin: 0 auto;
   overflow: hidden;
   padding-bottom: 50px;
-  animation: bottom-to-top 1s forwards;
+  /* animation: bottom-to-top 1s forwards;
   transition: 0.3s ease;
   opacity: 0;
-  animation-delay: 2s;
+  animation-delay: 2s; */
 }
 
 .hot-product {
   max-width: 1200px;
   margin: 20px auto;
   font-weight: 500;
-  animation: left-to-right 1s forwards;
-  transition: 0.3s ease;
-  opacity: 0;
-  animation-delay: 2s;
+  /* animation: left-to-right 1s forwards;
+transition: 0.3s ease;
+opacity: 0;
+animation-delay: 2s; */
 }
 
 .category {
@@ -634,4 +635,16 @@ p.load a#load-more span {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+.index-loading {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: rgb(26, 148, 255);
+  height: 100vh;
+  z-index: 99999999;
 }

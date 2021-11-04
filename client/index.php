@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="./css/grid.css">
   <title>Trang chủ</title>
   <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./css/loading.css">
 </head>
 
 <body>
@@ -22,6 +23,15 @@
   session_start();
   include('../server/config/config.php');
   ?>
+  <div class="index-loading">
+    <div class="loader">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+  </div>
   <main id="main">
     <div class="grid wide">
       <div class="main__slider">
@@ -205,6 +215,11 @@
   ?>
   <script src="./js/main.js"></script>
   <script>
+    setTimeout(() => {
+      $('.index-loading').style.display = 'none'
+      $('body').style.background = 'rgb(245, 245, 250)'
+    }, 2000)
+
     let currentPage = 1
     let height = 0
 
@@ -234,7 +249,7 @@
             } else {
               productList = data
 
-              if (productList.length <= 8) {
+              if (productList.length < 8) {
                 $('.load').style.display = 'none'
               }
 

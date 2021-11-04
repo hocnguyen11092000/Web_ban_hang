@@ -98,7 +98,7 @@
       box-shadow: 0 7px 25px rgb(0 0 0 / 8%);
       background-color: #fff;
       margin-top: 20px;
-      border-radius: 10px;
+      border-radius: 5px;
     }
 
     tr:nth-child(2n + 1) {

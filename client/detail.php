@@ -482,69 +482,105 @@
     const cartList = JSON.parse('<?php echo $cart ?>')
   </script>
   <script>
+    const countProduct = Number.parseInt(document.querySelector('.sub__quanlity p span').innerText)
+    let checkCount = 0
+    const quanlity_input = document.querySelector('.sub__add-quanlity input')
+    let numItem = 0
+    const idSearch = location.search.slice(4)
+    cartList.forEach((item, index) => {
+      if (item.id == idSearch) {
+        numItem = item.num
+      }
+    })
+
+    const countHtml = Number.parseInt(document.querySelector('.sub__quanlity p span').innerText)
+    quanlity_input.oninput = () => {
+      let addQuanlity = quanlity_input.value
+      if ((Number.parseInt(addQuanlity)) > countHtml || ((Number.parseInt(addQuanlity) + checkCount) + numItem) > countHtml) {
+        quanlity_input.value = 1
+        alert("Số lượng vượt quá số lượng hàng hóa")
+      }
+    }
+
     const addToCart = () => {
-      const quanlity = $('.sub__add-quanlity input')
-      const addQuanlity = quanlity.value
 
-      const id = '<?php echo $row['MSHH'] ?>'
-      const name = '<?php echo $row['TenHH'] ?>'
-      const img = '<?php echo $row['TenHinh'] ?>'
-      const price = '<?php echo $row['Gia'] ?>'
 
-      let isFind = false
-      for (let i = 0; i < cartList.length; i++) {
-        if (cartList[i].id == id) {
-          if (addQuanlity) {
-            if (addQuanlity !== '1') {
-              cartList[i].num += Number.parseInt(addQuanlity)
-              addQuanlity.value = 1
-              isFind = true
-              break
+      if (checkCount + numItem >= countProduct) {
+        alert("Số lượng vượt quá số hàng hiện có")
+        document.querySelector('.add-cart').disabled = 'true'
+        document.querySelector('.add-cart').style.cursor = 'not-allowed'
+      } else {
+
+        const id = '<?php echo $row['MSHH'] ?>'
+        const name = '<?php echo $row['TenHH'] ?>'
+        const img = '<?php echo $row['TenHinh'] ?>'
+        const price = '<?php echo $row['Gia'] ?>'
+
+        let isFind = false
+        let addQuanlity = quanlity_input.value
+        for (let i = 0; i < cartList.length; i++) {
+          if (cartList[i].id == id) {
+            if (addQuanlity) {
+              if (addQuanlity !== '1') {
+                cartList[i].num += Number.parseInt(addQuanlity)
+                checkCount += Number.parseInt(addQuanlity)
+                addQuanlity.value = 1
+                isFind = true
+                break
+              } else {
+                cartList[i].num++
+                checkCount += 1
+                isFind = true
+                break
+              }
             } else {
-              cartList[i].num++
+              alert('Nhập số lượng!')
               isFind = true
               break
             }
-          } else {
-            alert('Nhập số lượng!')
-            isFind = true
-            break
           }
         }
-      }
-      if (!isFind) {
-        if (addQuanlity !== '1') {
-          cartList.push({
-            id,
-            img,
-            name,
-            price,
-            'num': Number.parseInt(addQuanlity),
-          })
-        } else {
-          cartList.push({
-            id,
-            img,
-            name,
-            price,
-            'num': 1,
-          })
+        if (!isFind) {
+
+          if (addQuanlity !== '1') {
+            cartList.push({
+              id,
+              img,
+              name,
+              price,
+              'num': Number.parseInt(addQuanlity),
+            })
+            checkCount += Number.parseInt(addQuanlity)
+          } else {
+            cartList.push({
+              id,
+              img,
+              name,
+              price,
+              'num': 1,
+            })
+            checkCount += 1
+          }
         }
+        if (checkCount >= countProduct) {
+          document.querySelector('.add-cart').disabled = 'true'
+          document.querySelector('.add-cart').style.cursor = 'not-allowed'
+        }
+        console.log(cartList)
+        const now = new Date();
+        const time = now.getTime();
+        const expireTime = time + 30 * 24 * 60 * 60 * 1000;
+        now.setTime(expireTime);
+        document.cookie = "cart=" + JSON.stringify(cartList) + ";path=/;expires=" + now.toUTCString()
+
+        let total = 0
+        for (let i = 0; i < cartList.length; i++) {
+          total += cartList[i].num
+        }
+        document.querySelector('.count-cart').innerText = total
+        document.querySelector('.count').innerText = total
       }
 
-      console.log(cartList)
-      const now = new Date();
-      const time = now.getTime();
-      const expireTime = time + 30 * 24 * 60 * 60 * 1000;
-      now.setTime(expireTime);
-      document.cookie = "cart=" + JSON.stringify(cartList) + ";path=/;expires=" + now.toUTCString()
-
-      let total = 0
-      for (let i = 0; i < cartList.length; i++) {
-        total += cartList[i].num
-      }
-      document.querySelector('.count-cart').innerText = total
-      document.querySelector('.count').innerText = total
     }
 
     //js for sticky navbar

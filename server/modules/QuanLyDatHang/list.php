@@ -32,6 +32,7 @@
     margin: 0 10px;
   }
 
+
   tr:nth-child(2n + 1) {
     background-color: rgba(224, 228, 228, 0.5);
   }

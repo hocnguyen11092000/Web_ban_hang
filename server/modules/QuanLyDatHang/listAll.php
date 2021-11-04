@@ -24,10 +24,15 @@
     width: 100px;
   }
 
-  table {
+  /* table {} */
+
+  .BOX {
     margin-left: 20px;
     box-shadow: 0 7px 25px rgb(0 0 0 / 8%);
+    padding: 20px;
+    border-radius: 5px;
   }
+
 
   tr:nth-child(2n + 1) {
     background-color: rgba(224, 228, 228, 0.5);
@@ -217,187 +222,193 @@
       $sql_lietke_chuaduyet = "SELECT * FROM `dathang`, `khachhang` WHERE khachhang.MSKH = dathang.MSKH AND dathang.TrangThaiDH = '0' ORDER BY dathang.SoDonDH DESC";
       $query_lietke_chuaduyet = mysqli_query($mysqli, $sql_lietke_chuaduyet);
       ?>
-      <table style="width:100%">
+      <div class="BOX">
+        <table style="width:100%">
 
-        <tr>
-          <th>Id</th>
-          <th>Tên Khách Hàng</th>
-          <th>Ngày Đặt Hàng</th>
-          <th>Ngày Giao Hàng</th>
-          <th>Trạng Thái Đặt Hàng</th>
-          <th>Nhân viên chỉnh sửa</th>
-          <th>Quản lý</th>
-        </tr>
-        <?php
-        $i = 0;
-        while ($row_chuaduyet = mysqli_fetch_array($query_lietke_chuaduyet)) {
-          $i++;
-        ?>
           <tr>
-            <td style="width: 20px">
-              <?php echo $i ?>
-            </td>
-            <td>
-              <?php echo $row_chuaduyet['HoTenKH'] ?>
-            </td>
-            <td>
-              <?php echo $row_chuaduyet['NgayDH'] ?>
-            </td>
-            <td>
-              <?php echo $row_chuaduyet['NgayGH'] ?>
-            </td>
-            <td>
-              <?php
-              if ($row_chuaduyet['TrangThaiDH'] == 0) {
-                echo '<span class="await">Chưa Duyệt</span>';
-              } else if ($row_chuaduyet['TrangThaiDH'] == 1) {
-                echo '<span class="succ">Đã Duyệt</span>';
-              } else {
-                echo '<span class="err">Đã bị hủy</span>';
-              }
-              ?>
-            </td>
-            <td>
-              <?php
-              $sql_get_nv = "SELECT HoTenNV FROM `nhanvien` WHERE MSNV = '" . $row_chuaduyet['MSNV'] . "'";
-              $query_get_nv = mysqli_query($mysqli, $sql_get_nv);
-              $row_get_nv = mysqli_fetch_array($query_get_nv);
-
-              echo $row_get_nv['HoTenNV']
-              ?>
-            </td>
-            <td>
-              <a class="edit" href="?action=suadathang&id=<?php echo $row_chuaduyet['SoDonDH'] ?>">Sửa</a>
-            </td>
+            <th>Id</th>
+            <th>Tên Khách Hàng</th>
+            <th>Ngày Đặt Hàng</th>
+            <th>Ngày Giao Hàng</th>
+            <th>Trạng Thái Đặt Hàng</th>
+            <th>Nhân viên chỉnh sửa</th>
+            <th>Quản lý</th>
           </tr>
-        <?php
-        }
-        ?>
-      </table>
+          <?php
+          $i = 0;
+          while ($row_chuaduyet = mysqli_fetch_array($query_lietke_chuaduyet)) {
+            $i++;
+          ?>
+            <tr>
+              <td style="width: 20px">
+                <?php echo $i ?>
+              </td>
+              <td>
+                <?php echo $row_chuaduyet['HoTenKH'] ?>
+              </td>
+              <td>
+                <?php echo $row_chuaduyet['NgayDH'] ?>
+              </td>
+              <td>
+                <?php echo $row_chuaduyet['NgayGH'] ?>
+              </td>
+              <td>
+                <?php
+                if ($row_chuaduyet['TrangThaiDH'] == 0) {
+                  echo '<span class="await">Chưa Duyệt</span>';
+                } else if ($row_chuaduyet['TrangThaiDH'] == 1) {
+                  echo '<span class="succ">Đã Duyệt</span>';
+                } else {
+                  echo '<span class="err">Đã bị hủy</span>';
+                }
+                ?>
+              </td>
+              <td>
+                <?php
+                $sql_get_nv = "SELECT HoTenNV FROM `nhanvien` WHERE MSNV = '" . $row_chuaduyet['MSNV'] . "'";
+                $query_get_nv = mysqli_query($mysqli, $sql_get_nv);
+                $row_get_nv = mysqli_fetch_array($query_get_nv);
+
+                echo $row_get_nv['HoTenNV']
+                ?>
+              </td>
+              <td>
+                <a class="edit" href="?action=suadathang&id=<?php echo $row_chuaduyet['SoDonDH'] ?>">Sửa</a>
+              </td>
+            </tr>
+          <?php
+          }
+          ?>
+        </table>
+      </div>
     </div>
     <div class="tab__content">
       <?php
       $sql_lietke_daduyet = "SELECT * FROM `dathang`, `khachhang` WHERE khachhang.MSKH = dathang.MSKH AND dathang.TrangThaiDH = '1' ORDER BY dathang.SoDonDH DESC";
       $query_lietke_daduyet = mysqli_query($mysqli, $sql_lietke_daduyet);
       ?>
-      <table style="width:100%">
-        <tr>
-          <th>Id</th>
-          <th>Tên Khách Hàng</th>
-          <th>Ngày Đặt Hàng</th>
-          <th>Ngày Giao Hàng</th>
-          <th>Trạng Thái Đặt Hàng</th>
-          <th>Nhân viên chỉnh sửa</th>
-          <th>Quản lý</th>
-        </tr>
-        <?php
-        $i = 0;
-        while ($row_daduyet = mysqli_fetch_array($query_lietke_daduyet)) {
-          $i++;
-        ?>
+      <div class="BOX">
+        <table style="width:100%">
           <tr>
-            <td style="width: 20px">
-              <?php echo $i ?>
-            </td>
-            <td>
-              <?php echo $row_daduyet['HoTenKH'] ?>
-            </td>
-            <td>
-              <?php echo $row_daduyet['NgayDH'] ?>
-            </td>
-            <td>
-              <?php echo $row_daduyet['NgayGH'] ?>
-            </td>
-            <td>
-              <?php
-              if ($row_daduyet['TrangThaiDH'] == 0) {
-                echo '<span class="await">Chưa Duyệt</span>';
-              } else if ($row_daduyet['TrangThaiDH'] == 1) {
-                echo '<span class="succ">Đã Duyệt</span>';
-              } else {
-                echo '<span class="err">Đã bị hủy</span>';
-              }
-              ?>
-            </td>
-            <td>
-              <?php
-              $sql_get_nv = "SELECT HoTenNV FROM `nhanvien` WHERE MSNV = '" . $row_daduyet['MSNV'] . "'";
-              $query_get_nv = mysqli_query($mysqli, $sql_get_nv);
-              $row_get_nv = mysqli_fetch_array($query_get_nv);
-
-              echo $row_get_nv['HoTenNV']
-              ?>
-            </td>
-            <td>
-              <a class="edit" href="?action=suadathang&id=<?php echo $row_daduyet['SoDonDH'] ?>">Sửa</a>
-            </td>
+            <th>Id</th>
+            <th>Tên Khách Hàng</th>
+            <th>Ngày Đặt Hàng</th>
+            <th>Ngày Giao Hàng</th>
+            <th>Trạng Thái Đặt Hàng</th>
+            <th>Nhân viên chỉnh sửa</th>
+            <th>Quản lý</th>
           </tr>
-        <?php
-        }
-        ?>
-      </table>
+          <?php
+          $i = 0;
+          while ($row_daduyet = mysqli_fetch_array($query_lietke_daduyet)) {
+            $i++;
+          ?>
+            <tr>
+              <td style="width: 20px">
+                <?php echo $i ?>
+              </td>
+              <td>
+                <?php echo $row_daduyet['HoTenKH'] ?>
+              </td>
+              <td>
+                <?php echo $row_daduyet['NgayDH'] ?>
+              </td>
+              <td>
+                <?php echo $row_daduyet['NgayGH'] ?>
+              </td>
+              <td>
+                <?php
+                if ($row_daduyet['TrangThaiDH'] == 0) {
+                  echo '<span class="await">Chưa Duyệt</span>';
+                } else if ($row_daduyet['TrangThaiDH'] == 1) {
+                  echo '<span class="succ">Đã Duyệt</span>';
+                } else {
+                  echo '<span class="err">Đã bị hủy</span>';
+                }
+                ?>
+              </td>
+              <td>
+                <?php
+                $sql_get_nv = "SELECT HoTenNV FROM `nhanvien` WHERE MSNV = '" . $row_daduyet['MSNV'] . "'";
+                $query_get_nv = mysqli_query($mysqli, $sql_get_nv);
+                $row_get_nv = mysqli_fetch_array($query_get_nv);
+
+                echo $row_get_nv['HoTenNV']
+                ?>
+              </td>
+              <td>
+                <a class="edit" href="?action=suadathang&id=<?php echo $row_daduyet['SoDonDH'] ?>">Sửa</a>
+              </td>
+            </tr>
+          <?php
+          }
+          ?>
+        </table>
+      </div>
     </div>
     <div class="tab__content">
       <?php
       $sql_lietke_dahuy = "SELECT * FROM `dathang`, `khachhang` WHERE khachhang.MSKH = dathang.MSKH AND dathang.TrangThaiDH = '2' ORDER BY dathang.SoDonDH DESC";
       $query_lietke_dahuy = mysqli_query($mysqli, $sql_lietke_dahuy);
       ?>
-      <table style="width:100%">
-        <tr>
-          <th>Id</th>
-          <th>Tên Khách Hàng</th>
-          <th>Ngày Đặt Hàng</th>
-          <th>Ngày Giao Hàng</th>
-          <th>Trạng Thái Đặt Hàng</th>
-          <th>Nhân viên chỉnh sửa</th>
-          <th>Quản lý</th>
-        </tr>
-        <?php
-        $i = 0;
-        while ($row_dahuy = mysqli_fetch_array($query_lietke_dahuy)) {
-          $i++;
-        ?>
+      <div class="BOX">
+        <table style="width:100%">
           <tr>
-            <td style="width: 20px">
-              <?php echo $i ?>
-            </td>
-            <td>
-              <?php echo $row_dahuy['HoTenKH'] ?>
-            </td>
-            <td>
-              <?php echo $row_dahuy['NgayDH'] ?>
-            </td>
-            <td>
-              <?php echo $row_dahuy['NgayGH'] ?>
-            </td>
-            <td>
-              <?php
-              if ($row_dahuy['TrangThaiDH'] == 0) {
-                echo '<span class="await">Chưa Duyệt</span>';
-              } else if ($row_dahuy['TrangThaiDH'] == 1) {
-                echo '<span class="succ">Đã Duyệt</span>';
-              } else {
-                echo '<span class="err">Đã bị hủy</span>';
-              }
-              ?>
-            </td>
-            <td>
-              <?php
-              $sql_get_nv = "SELECT HoTenNV FROM `nhanvien` WHERE MSNV = '" . $row_dahuy['MSNV'] . "'";
-              $query_get_nv = mysqli_query($mysqli, $sql_get_nv);
-              $row_get_nv = mysqli_fetch_array($query_get_nv);
-
-              echo $row_get_nv['HoTenNV']
-              ?>
-            </td>
-            <td>
-              <a class="edit" href="?action=suadathang&id=<?php echo $row_dahuy['SoDonDH'] ?>">Sửa</a>
-            </td>
+            <th>Id</th>
+            <th>Tên Khách Hàng</th>
+            <th>Ngày Đặt Hàng</th>
+            <th>Ngày Giao Hàng</th>
+            <th>Trạng Thái Đặt Hàng</th>
+            <th>Nhân viên chỉnh sửa</th>
+            <th>Quản lý</th>
           </tr>
-        <?php
-        }
-        ?>
-      </table>
+          <?php
+          $i = 0;
+          while ($row_dahuy = mysqli_fetch_array($query_lietke_dahuy)) {
+            $i++;
+          ?>
+            <tr>
+              <td style="width: 20px">
+                <?php echo $i ?>
+              </td>
+              <td>
+                <?php echo $row_dahuy['HoTenKH'] ?>
+              </td>
+              <td>
+                <?php echo $row_dahuy['NgayDH'] ?>
+              </td>
+              <td>
+                <?php echo $row_dahuy['NgayGH'] ?>
+              </td>
+              <td>
+                <?php
+                if ($row_dahuy['TrangThaiDH'] == 0) {
+                  echo '<span class="await">Chưa Duyệt</span>';
+                } else if ($row_dahuy['TrangThaiDH'] == 1) {
+                  echo '<span class="succ">Đã Duyệt</span>';
+                } else {
+                  echo '<span class="err">Đã bị hủy</span>';
+                }
+                ?>
+              </td>
+              <td>
+                <?php
+                $sql_get_nv = "SELECT HoTenNV FROM `nhanvien` WHERE MSNV = '" . $row_dahuy['MSNV'] . "'";
+                $query_get_nv = mysqli_query($mysqli, $sql_get_nv);
+                $row_get_nv = mysqli_fetch_array($query_get_nv);
+
+                echo $row_get_nv['HoTenNV']
+                ?>
+              </td>
+              <td>
+                <a class="edit" href="?action=suadathang&id=<?php echo $row_dahuy['SoDonDH'] ?>">Sửa</a>
+              </td>
+            </tr>
+          <?php
+          }
+          ?>
+        </table>
+      </div>
     </div>
   </div>
 </main>

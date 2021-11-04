@@ -16,8 +16,8 @@ if (isset($_POST['addsanpham'])) {
   $query = mysqli_query($mysqli, $sql_them);
 
   if ($query) {
-    $_SESSION['success'] = "Thêm hàng hóa thành công, <a class='add-img' href='../modules/index.php?action=themhinhanhhanghoatest'>Click để thêm hình ảnh hàng hóa</a href=''>";
-    header('Location:../../modules/index.php?action=themhanghoa');
+    $_SESSION['success'] = "Thêm hàng hóa thành công, Vui lòng thêm hình ảnh hàng hóa";
+    header('Location:../../modules/index.php?action=themhinhanhhanghoatest');
   } else {
     $_SESSION['status'] = "Thêm hàng hóa thất bại";
     header('Location:../../modules/index.php?action=themhanghoa');
